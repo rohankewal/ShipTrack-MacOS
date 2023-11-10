@@ -16,7 +16,7 @@ struct ContentView: View {
         VStack {
             // Top Map Card
             MapView()
-                .frame(height: 200) // Adjust height as needed
+                .frame(maxHeight: .infinity) // Adjust height as needed
             
             // Middle Cards: Table and Graph
             HStack(spacing: 20) {
@@ -29,7 +29,7 @@ struct ContentView: View {
             
             // Bottom Table Card
             TableView()
-                .frame(height: 200) // Adjust height as needed
+                .frame(maxHeight: .infinity) // Adjust height as needed
         }
         .padding()
         .toolbar {
@@ -79,6 +79,7 @@ struct TableView: View {
     let shipments: [Shipment] = [
         Shipment(id: 1, description: "Electronics", status: "In Transit", estimatedDelivery: "2023-12-10"),
         Shipment(id: 2, description: "Books", status: "Delivered", estimatedDelivery: "2023-11-05"),
+        Shipment(id: 3, description: "Steel", status: "Delayed", estimatedDelivery: "2023-11-04"),
         // Add more data as needed
     ]
 
@@ -98,7 +99,10 @@ struct TableView: View {
                 Text(shipment.status)
                     .fontWeight(.bold)
                     .padding(8)
-                    .background(shipment.status == "In Transit" ? Color.blue : Color.green)
+                    .background(
+                        shipment.status == "In Transit" ? Color.blue :
+                        shipment.status == "Delayed" ? Color.red : Color.green
+                    )
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
