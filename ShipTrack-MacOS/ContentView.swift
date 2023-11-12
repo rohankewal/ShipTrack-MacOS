@@ -33,11 +33,30 @@ struct ContentView: View {
         }
         .padding()
         .toolbar {
-            ToolbarItem(placement: .navigation) {
+            ToolbarItemGroup(placement: .navigation) {
                 Text("ShipTrack Dashboard")
                     .font(.headline)
             }
-            ToolbarItem(placement: .automatic) {
+
+            ToolbarItemGroup(placement: .automatic) {
+                Button(action: {
+                    // Action to add a shipment
+                }) {
+                    Label("Add Shipment", systemImage: "plus")
+                }
+
+                Button(action: {
+                    // Action to export data
+                }) {
+                    Label("Export", systemImage: "square.and.arrow.up")
+                }
+
+                Button(action: {
+                    // Action to import data
+                }) {
+                    Label("Import", systemImage: "square.and.arrow.down")
+                }
+
                 Toggle(isOn: $isDarkMode) {
                     Text("Dark Mode")
                 }
@@ -61,7 +80,7 @@ struct MapView: View {
         center: CLLocationCoordinate2D(latitude: 34.011286, longitude: -116.166868), // Example coordinates
         span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
     )
-
+    
     var body: some View {
         Map(coordinateRegion: $region)
     }
@@ -82,7 +101,7 @@ struct TableView: View {
         Shipment(id: 3, description: "Steel", status: "Delayed", estimatedDelivery: "2023-11-04"),
         // Add more data as needed
     ]
-
+    
     var body: some View {
         List(shipments, id: \.id) { shipment in
             HStack {
@@ -93,15 +112,15 @@ struct TableView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
-
+                
                 Spacer()
-
+                
                 Text(shipment.status)
                     .fontWeight(.bold)
                     .padding(8)
                     .background(
                         shipment.status == "In Transit" ? Color.blue :
-                        shipment.status == "Delayed" ? Color.red : Color.green
+                            shipment.status == "Delayed" ? Color.red : Color.green
                     )
                     .foregroundColor(.white)
                     .cornerRadius(10)
@@ -109,6 +128,7 @@ struct TableView: View {
         }
     }
 }
+
 
 struct GraphView: View {
     var body: some View {
