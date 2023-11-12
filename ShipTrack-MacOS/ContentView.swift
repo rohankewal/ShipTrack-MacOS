@@ -20,7 +20,7 @@ struct ContentView: View {
             
             // Middle Cards: Table and Graph
             HStack(spacing: 20) {
-                TableView()
+                ShipmentsTableView()
                     .frame(maxWidth: .infinity)
                 
                 GraphView()
@@ -28,7 +28,7 @@ struct ContentView: View {
             }
             
             // Bottom Table Card
-            TableView()
+            AccountingTableView()
                 .frame(maxHeight: .infinity) // Adjust height as needed
         }
         .padding()
@@ -93,7 +93,7 @@ struct Shipment {
     var estimatedDelivery: String
 }
 
-struct TableView: View {
+struct ShipmentsTableView: View {
     // Example data array for Shipments
     let shipments: [Shipment] = [
         Shipment(id: 1, description: "Electronics", status: "In Transit", estimatedDelivery: "2023-12-10"),
@@ -124,6 +124,44 @@ struct TableView: View {
                     )
                     .foregroundColor(.white)
                     .cornerRadius(10)
+            }
+        }
+    }
+}
+
+
+// todo: create a different table for accounts for the bottom table
+struct ShipmentAccounting {
+    var id: Int
+    var cost: Double
+    var revenue: Double
+    var profit: Double {
+        revenue - cost
+    }
+}
+
+struct AccountingTableView: View {
+    // Example data array for Shipment Accounting
+    let accountingData: [ShipmentAccounting] = [
+        ShipmentAccounting(id: 1, cost: 1200.00, revenue: 1500.00),
+        ShipmentAccounting(id: 2, cost: 800.00, revenue: 950.00),
+        // Add more data as needed
+    ]
+
+    var body: some View {
+        List(accountingData, id: \.id) { data in
+            HStack {
+                Text("ID: \(data.id)")
+                    .frame(width: 50, alignment: .leading)
+
+                Spacer()
+
+                VStack(alignment: .trailing) {
+                    Text("Cost: $\(data.cost, specifier: "%.2f")")
+                    Text("Revenue: $\(data.revenue, specifier: "%.2f")")
+                    Text("Profit: $\(data.profit, specifier: "%.2f")")
+                        .foregroundColor(data.profit >= 0 ? .green : .red)
+                }
             }
         }
     }
