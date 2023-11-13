@@ -89,6 +89,7 @@ struct MapView: View {
 struct Shipment {
     var id: Int
     var description: String
+    var method: String
     var status: String
     var estimatedDelivery: String
 }
@@ -96,9 +97,9 @@ struct Shipment {
 struct ShipmentsTableView: View {
     // Example data array for Shipments
     let shipments: [Shipment] = [
-        Shipment(id: 1, description: "Electronics", status: "In Transit", estimatedDelivery: "2023-12-10"),
-        Shipment(id: 2, description: "Books", status: "Delivered", estimatedDelivery: "2023-11-05"),
-        Shipment(id: 3, description: "Steel", status: "Delayed", estimatedDelivery: "2023-11-04"),
+        Shipment(id: 1, description: "Electronics", method: "air", status: "In Transit", estimatedDelivery: "2023-12-10"),
+        Shipment(id: 2, description: "Books", method: "ship", status: "Delivered", estimatedDelivery: "2023-11-05"),
+        Shipment(id: 3, description: "Steel", method: "rail", status: "Delayed", estimatedDelivery: "2023-11-04"),
         // Add more data as needed
     ]
     
@@ -109,6 +110,9 @@ struct ShipmentsTableView: View {
                     Text(shipment.description)
                         .font(.headline)
                     Text("Estimated Delivery: \(shipment.estimatedDelivery)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Text("Delivery Method: \(shipment.method)")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
