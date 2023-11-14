@@ -14,6 +14,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            Text("Map")
+                .font(.title)
+                .fontWeight(.bold)
             // Top Map Card
             MapView()
                 .frame(maxHeight: .infinity) // Adjust height as needed
