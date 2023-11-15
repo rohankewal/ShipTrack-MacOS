@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Charts
 
 struct ContentView: View {
     
@@ -44,6 +45,7 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .automatic) {
                 Button(action: {
                     // Action to add a shipment
+                    
                 }) {
                     Label("Add Shipment", systemImage: "plus")
                 }
@@ -111,13 +113,13 @@ struct ShipmentsTableView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(shipment.description)
-                        .font(.headline)
+                        .font(.largeTitle)
                     Text("Estimated Delivery: \(shipment.estimatedDelivery)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .font(.title)
+                        // .foregroundColor(.gray)
                     Text("Delivery Method: \(shipment.method)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .font(.title)
+                        // .foregroundColor(.gray)
                 }
                 
                 Spacer()
